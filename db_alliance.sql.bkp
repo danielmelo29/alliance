@@ -1,0 +1,371 @@
+-- --------------------------------------------------------
+-- Servidor:                     127.0.0.1
+-- Versão do servidor:           5.5.27 - MySQL Community Server (GPL)
+-- OS do Servidor:               Win32
+-- HeidiSQL Versão:              8.0.0.4396
+-- --------------------------------------------------------
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET NAMES utf8 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+
+-- Copiando estrutura do banco de dados para db_alliance
+DROP DATABASE IF EXISTS `db_alliance`;
+CREATE DATABASE IF NOT EXISTS `db_alliance` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `db_alliance`;
+
+
+-- Copiando estrutura para tabela db_alliance.agenda_manutencao
+DROP TABLE IF EXISTS `agenda_manutencao`;
+CREATE TABLE IF NOT EXISTS `agenda_manutencao` (
+  `idagenda_manutencao` int(11) NOT NULL AUTO_INCREMENT,
+  `titulo` varchar(60) NOT NULL,
+  `data` date NOT NULL,
+  `hora` time DEFAULT NULL,
+  `descricao` text,
+  `usuarios` int(11) NOT NULL,
+  PRIMARY KEY (`idagenda_manutencao`),
+  KEY `fk_agenda_manutencao_usuarios1_idx` (`usuarios`),
+  CONSTRAINT `fk_agenda_manutencao_usuarios1` FOREIGN KEY (`usuarios`) REFERENCES `usuarios` (`idusuarios`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- Copiando dados para a tabela db_alliance.agenda_manutencao: ~1 rows (aproximadamente)
+/*!40000 ALTER TABLE `agenda_manutencao` DISABLE KEYS */;
+INSERT INTO `agenda_manutencao` (`idagenda_manutencao`, `titulo`, `data`, `hora`, `descricao`, `usuarios`) VALUES
+	(1, 'Consertar calçada', '2014-03-12', '10:02:07', 'A calçada da rua xls está com defeito, ontem minha avó torceu o pé e caiu', 7);
+/*!40000 ALTER TABLE `agenda_manutencao` ENABLE KEYS */;
+
+
+-- Copiando estrutura para tabela db_alliance.areas
+DROP TABLE IF EXISTS `areas`;
+CREATE TABLE IF NOT EXISTS `areas` (
+  `idareas` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(40) NOT NULL,
+  `situacao` enum('L','I') NOT NULL COMMENT 'L - Liberado\nI - Indisponivel',
+  `obs` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`idareas`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Copiando dados para a tabela db_alliance.areas: ~0 rows (aproximadamente)
+/*!40000 ALTER TABLE `areas` DISABLE KEYS */;
+/*!40000 ALTER TABLE `areas` ENABLE KEYS */;
+
+
+-- Copiando estrutura para tabela db_alliance.avisos
+DROP TABLE IF EXISTS `avisos`;
+CREATE TABLE IF NOT EXISTS `avisos` (
+  `idavisos` int(11) NOT NULL AUTO_INCREMENT,
+  `aviso` varchar(200) NOT NULL,
+  `usuarios` int(11) NOT NULL,
+  PRIMARY KEY (`idavisos`),
+  KEY `fk_avisos_usuarios1_idx` (`usuarios`),
+  CONSTRAINT `fk_avisos_usuarios1` FOREIGN KEY (`usuarios`) REFERENCES `usuarios` (`idusuarios`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Copiando dados para a tabela db_alliance.avisos: ~0 rows (aproximadamente)
+/*!40000 ALTER TABLE `avisos` DISABLE KEYS */;
+/*!40000 ALTER TABLE `avisos` ENABLE KEYS */;
+
+
+-- Copiando estrutura para tabela db_alliance.convidados
+DROP TABLE IF EXISTS `convidados`;
+CREATE TABLE IF NOT EXISTS `convidados` (
+  `idconvidados` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(100) NOT NULL,
+  `cpf` int(11) DEFAULT NULL,
+  `rg` int(11) DEFAULT NULL,
+  `reservas` int(11) NOT NULL,
+  PRIMARY KEY (`idconvidados`),
+  KEY `fk_convidados_reservas1_idx` (`reservas`),
+  CONSTRAINT `fk_convidados_reservas1` FOREIGN KEY (`reservas`) REFERENCES `reservas` (`idreservas`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Copiando dados para a tabela db_alliance.convidados: ~0 rows (aproximadamente)
+/*!40000 ALTER TABLE `convidados` DISABLE KEYS */;
+/*!40000 ALTER TABLE `convidados` ENABLE KEYS */;
+
+
+-- Copiando estrutura para tabela db_alliance.dias_trabalho
+DROP TABLE IF EXISTS `dias_trabalho`;
+CREATE TABLE IF NOT EXISTS `dias_trabalho` (
+  `iddias_trabalho` int(11) NOT NULL AUTO_INCREMENT,
+  `domingo` enum('S','N') DEFAULT NULL,
+  `segunda` enum('S','N') DEFAULT NULL,
+  `terca` enum('S','N') DEFAULT NULL,
+  `quarta` enum('S','N') DEFAULT NULL,
+  `quinta` enum('S','N') DEFAULT NULL,
+  `sexta` enum('S','N') DEFAULT NULL,
+  `sabado` enum('S','N') DEFAULT NULL,
+  `funcionarios` int(11) NOT NULL,
+  PRIMARY KEY (`iddias_trabalho`),
+  KEY `fk_dias_trabalho_funcionarios1_idx` (`funcionarios`),
+  CONSTRAINT `fk_dias_trabalho_funcionarios1` FOREIGN KEY (`funcionarios`) REFERENCES `funcionarios` (`idfuncionarios`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Copiando dados para a tabela db_alliance.dias_trabalho: ~0 rows (aproximadamente)
+/*!40000 ALTER TABLE `dias_trabalho` DISABLE KEYS */;
+/*!40000 ALTER TABLE `dias_trabalho` ENABLE KEYS */;
+
+
+-- Copiando estrutura para tabela db_alliance.documentos
+DROP TABLE IF EXISTS `documentos`;
+CREATE TABLE IF NOT EXISTS `documentos` (
+  `iddocumentos` int(11) NOT NULL AUTO_INCREMENT,
+  `descricao` varchar(45) NOT NULL,
+  `data` datetime NOT NULL,
+  `documento` varchar(100) NOT NULL,
+  `usuarios` int(11) NOT NULL,
+  PRIMARY KEY (`iddocumentos`),
+  KEY `fk_documentos_usuarios2_idx` (`usuarios`),
+  CONSTRAINT `fk_documentos_usuarios2` FOREIGN KEY (`usuarios`) REFERENCES `usuarios` (`idusuarios`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- Copiando dados para a tabela db_alliance.documentos: ~1 rows (aproximadamente)
+/*!40000 ALTER TABLE `documentos` DISABLE KEYS */;
+INSERT INTO `documentos` (`iddocumentos`, `descricao`, `data`, `documento`, `usuarios`) VALUES
+	(1, 'Contrato', '2014-03-14 10:53:00', 'docs/arquivos/contrato2014.doc', 6);
+/*!40000 ALTER TABLE `documentos` ENABLE KEYS */;
+
+
+-- Copiando estrutura para tabela db_alliance.erros
+DROP TABLE IF EXISTS `erros`;
+CREATE TABLE IF NOT EXISTS `erros` (
+  `iderros` int(11) NOT NULL AUTO_INCREMENT,
+  `erro` text NOT NULL,
+  PRIMARY KEY (`iderros`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Copiando dados para a tabela db_alliance.erros: ~0 rows (aproximadamente)
+/*!40000 ALTER TABLE `erros` DISABLE KEYS */;
+/*!40000 ALTER TABLE `erros` ENABLE KEYS */;
+
+
+-- Copiando estrutura para tabela db_alliance.fornecedores
+DROP TABLE IF EXISTS `fornecedores`;
+CREATE TABLE IF NOT EXISTS `fornecedores` (
+  `idfornecedores` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(60) NOT NULL,
+  `cnpj` bigint(20) DEFAULT NULL,
+  `descricao` varchar(100) DEFAULT NULL,
+  `responsavel` varchar(60) NOT NULL,
+  `site` varchar(100) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`idfornecedores`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- Copiando dados para a tabela db_alliance.fornecedores: ~1 rows (aproximadamente)
+/*!40000 ALTER TABLE `fornecedores` DISABLE KEYS */;
+INSERT INTO `fornecedores` (`idfornecedores`, `nome`, `cnpj`, `descricao`, `responsavel`, `site`, `email`) VALUES
+	(1, 'Estancia Rei Salomão', 7657576576, 'Fornece materias de construção', 'Adelson Silva', NULL, 'adelson@hotmail.com');
+/*!40000 ALTER TABLE `fornecedores` ENABLE KEYS */;
+
+
+-- Copiando estrutura para tabela db_alliance.funcionarios
+DROP TABLE IF EXISTS `funcionarios`;
+CREATE TABLE IF NOT EXISTS `funcionarios` (
+  `idfuncionarios` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(100) NOT NULL,
+  `cargo` varchar(60) NOT NULL,
+  `h_inicio` time NOT NULL,
+  `h_fim` time NOT NULL,
+  PRIMARY KEY (`idfuncionarios`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- Copiando dados para a tabela db_alliance.funcionarios: ~1 rows (aproximadamente)
+/*!40000 ALTER TABLE `funcionarios` DISABLE KEYS */;
+INSERT INTO `funcionarios` (`idfuncionarios`, `nome`, `cargo`, `h_inicio`, `h_fim`) VALUES
+	(1, 'João Silva', 'Paisagista', '08:00:00', '18:00:00');
+/*!40000 ALTER TABLE `funcionarios` ENABLE KEYS */;
+
+
+-- Copiando estrutura para tabela db_alliance.horarios
+DROP TABLE IF EXISTS `horarios`;
+CREATE TABLE IF NOT EXISTS `horarios` (
+  `idhorarios` int(11) NOT NULL AUTO_INCREMENT,
+  `hora_inicio` time NOT NULL,
+  `hora_fim` time NOT NULL,
+  `idareas` int(11) NOT NULL,
+  PRIMARY KEY (`idhorarios`),
+  KEY `fk_horarios_areas1_idx` (`idareas`),
+  CONSTRAINT `fk_horarios_areas1` FOREIGN KEY (`idareas`) REFERENCES `areas` (`idareas`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Copiando dados para a tabela db_alliance.horarios: ~0 rows (aproximadamente)
+/*!40000 ALTER TABLE `horarios` DISABLE KEYS */;
+/*!40000 ALTER TABLE `horarios` ENABLE KEYS */;
+
+
+-- Copiando estrutura para tabela db_alliance.ocorrencias
+DROP TABLE IF EXISTS `ocorrencias`;
+CREATE TABLE IF NOT EXISTS `ocorrencias` (
+  `idocorrencias` int(11) NOT NULL AUTO_INCREMENT,
+  `titulo` varchar(45) NOT NULL,
+  `tipo` enum('M','O') NOT NULL,
+  `descricacao` text NOT NULL,
+  `status` enum('N','A','F') NOT NULL COMMENT 'N - Novo\nA - Lido e em análise\nF - Finalizado',
+  `data` datetime DEFAULT NULL,
+  `usuarios` int(11) NOT NULL,
+  PRIMARY KEY (`idocorrencias`),
+  KEY `fk_ocorrencias_usuarios2_idx` (`usuarios`),
+  CONSTRAINT `fk_ocorrencias_usuarios2` FOREIGN KEY (`usuarios`) REFERENCES `usuarios` (`idusuarios`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Copiando dados para a tabela db_alliance.ocorrencias: ~0 rows (aproximadamente)
+/*!40000 ALTER TABLE `ocorrencias` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ocorrencias` ENABLE KEYS */;
+
+
+-- Copiando estrutura para tabela db_alliance.reservas
+DROP TABLE IF EXISTS `reservas`;
+CREATE TABLE IF NOT EXISTS `reservas` (
+  `idreservas` int(11) NOT NULL AUTO_INCREMENT,
+  `dt_inicio` datetime NOT NULL,
+  `dt_fim` datetime NOT NULL,
+  `valor` float DEFAULT NULL,
+  `status` enum('E','C') NOT NULL COMMENT 'E - Esperando confirmação do sindico\nC - Confirmado',
+  `obs` text,
+  `areas` int(11) NOT NULL,
+  `usuarios` int(11) NOT NULL,
+  PRIMARY KEY (`idreservas`),
+  KEY `fk_reservas_areas1_idx` (`areas`),
+  KEY `fk_reservas_usuarios1_idx` (`usuarios`),
+  CONSTRAINT `fk_reservas_areas1` FOREIGN KEY (`areas`) REFERENCES `areas` (`idareas`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_reservas_usuarios1` FOREIGN KEY (`usuarios`) REFERENCES `usuarios` (`idusuarios`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Copiando dados para a tabela db_alliance.reservas: ~0 rows (aproximadamente)
+/*!40000 ALTER TABLE `reservas` DISABLE KEYS */;
+/*!40000 ALTER TABLE `reservas` ENABLE KEYS */;
+
+
+-- Copiando estrutura para tabela db_alliance.residencia
+DROP TABLE IF EXISTS `residencia`;
+CREATE TABLE IF NOT EXISTS `residencia` (
+  `idresidencia` int(11) NOT NULL AUTO_INCREMENT,
+  `numero` int(11) DEFAULT NULL,
+  `tipo` enum('A','C') DEFAULT NULL COMMENT 'A - Apartamento\nC - Casa',
+  `bloco` varchar(10) DEFAULT NULL,
+  `status` enum('O','D') DEFAULT NULL COMMENT 'O - Ocupado\nD - Desocupado',
+  `situacao` enum('P','A') DEFAULT NULL COMMENT 'P - próprio\nA - Alugado',
+  `tipo_residencia` int(11) NOT NULL,
+  `usuarios` int(11) NOT NULL,
+  PRIMARY KEY (`idresidencia`),
+  KEY `fk_residencia_tipo_residencia1_idx` (`tipo_residencia`),
+  KEY `fk_residencia_usuarios2_idx` (`usuarios`),
+  CONSTRAINT `fk_residencia_tipo_residencia1` FOREIGN KEY (`tipo_residencia`) REFERENCES `tipo_residencia` (`idtipo_residencia`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_residencia_usuarios2` FOREIGN KEY (`usuarios`) REFERENCES `usuarios` (`idusuarios`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Copiando dados para a tabela db_alliance.residencia: ~0 rows (aproximadamente)
+/*!40000 ALTER TABLE `residencia` DISABLE KEYS */;
+/*!40000 ALTER TABLE `residencia` ENABLE KEYS */;
+
+
+-- Copiando estrutura para tabela db_alliance.tasks
+DROP TABLE IF EXISTS `tasks`;
+CREATE TABLE IF NOT EXISTS `tasks` (
+  `idtasks` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  `priority` int(2) NOT NULL,
+  PRIMARY KEY (`idtasks`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Copiando dados para a tabela db_alliance.tasks: ~0 rows (aproximadamente)
+/*!40000 ALTER TABLE `tasks` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tasks` ENABLE KEYS */;
+
+
+-- Copiando estrutura para tabela db_alliance.telefones
+DROP TABLE IF EXISTS `telefones`;
+CREATE TABLE IF NOT EXISTS `telefones` (
+  `idtelefones` int(11) NOT NULL AUTO_INCREMENT,
+  `numero` int(11) NOT NULL,
+  `tipo` enum('C','R','CO') NOT NULL,
+  `usuarios` int(11) NOT NULL,
+  PRIMARY KEY (`idtelefones`),
+  KEY `fk_telefone_usuarios1_idx` (`usuarios`),
+  CONSTRAINT `fk_telefone_usuarios1` FOREIGN KEY (`usuarios`) REFERENCES `usuarios` (`idusuarios`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+-- Copiando dados para a tabela db_alliance.telefones: ~3 rows (aproximadamente)
+/*!40000 ALTER TABLE `telefones` DISABLE KEYS */;
+INSERT INTO `telefones` (`idtelefones`, `numero`, `tipo`, `usuarios`) VALUES
+	(1, 2147483647, 'C', 7),
+	(2, 2147483647, 'C', 2),
+	(3, 2147483647, 'R', 5);
+/*!40000 ALTER TABLE `telefones` ENABLE KEYS */;
+
+
+-- Copiando estrutura para tabela db_alliance.telefone_fornecedor
+DROP TABLE IF EXISTS `telefone_fornecedor`;
+CREATE TABLE IF NOT EXISTS `telefone_fornecedor` (
+  `idtelefone` int(11) NOT NULL AUTO_INCREMENT,
+  `numero` int(11) NOT NULL,
+  `tipo` enum('C','R','CO') NOT NULL,
+  `fornecedores` int(11) NOT NULL,
+  PRIMARY KEY (`idtelefone`),
+  KEY `fk_telefone_fornecedor_fornecedores1_idx` (`fornecedores`),
+  CONSTRAINT `fk_telefone_fornecedor_fornecedores1` FOREIGN KEY (`fornecedores`) REFERENCES `fornecedores` (`idfornecedores`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Copiando dados para a tabela db_alliance.telefone_fornecedor: ~0 rows (aproximadamente)
+/*!40000 ALTER TABLE `telefone_fornecedor` DISABLE KEYS */;
+/*!40000 ALTER TABLE `telefone_fornecedor` ENABLE KEYS */;
+
+
+-- Copiando estrutura para tabela db_alliance.tesouraria
+DROP TABLE IF EXISTS `tesouraria`;
+CREATE TABLE IF NOT EXISTS `tesouraria` (
+  `idtesouraria` int(11) NOT NULL AUTO_INCREMENT,
+  `descricao` varchar(45) NOT NULL,
+  `data` datetime NOT NULL,
+  `valor` float NOT NULL,
+  `tipo` enum('R','D') DEFAULT NULL COMMENT 'R - Receitas\nD - Despesas',
+  PRIMARY KEY (`idtesouraria`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- Copiando dados para a tabela db_alliance.tesouraria: ~1 rows (aproximadamente)
+/*!40000 ALTER TABLE `tesouraria` DISABLE KEYS */;
+INSERT INTO `tesouraria` (`idtesouraria`, `descricao`, `data`, `valor`, `tipo`) VALUES
+	(1, 'Cimento', '2014-03-07 10:17:53', 1786, 'D');
+/*!40000 ALTER TABLE `tesouraria` ENABLE KEYS */;
+
+
+-- Copiando estrutura para tabela db_alliance.tipo_residencia
+DROP TABLE IF EXISTS `tipo_residencia`;
+CREATE TABLE IF NOT EXISTS `tipo_residencia` (
+  `idtipo_residencia` int(11) NOT NULL AUTO_INCREMENT,
+  `tipo` varchar(45) NOT NULL,
+  PRIMARY KEY (`idtipo_residencia`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Copiando dados para a tabela db_alliance.tipo_residencia: ~0 rows (aproximadamente)
+/*!40000 ALTER TABLE `tipo_residencia` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tipo_residencia` ENABLE KEYS */;
+
+
+-- Copiando estrutura para tabela db_alliance.usuarios
+DROP TABLE IF EXISTS `usuarios`;
+CREATE TABLE IF NOT EXISTS `usuarios` (
+  `idusuarios` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(60) NOT NULL,
+  `senha` char(32) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `tipo` enum('A','M') NOT NULL COMMENT 'M - Morador\nA - Alugado',
+  `ativo` tinyint(4) NOT NULL,
+  PRIMARY KEY (`idusuarios`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+
+-- Copiando dados para a tabela db_alliance.usuarios: ~5 rows (aproximadamente)
+/*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
+INSERT INTO `usuarios` (`idusuarios`, `nome`, `senha`, `email`, `tipo`, `ativo`) VALUES
+	(2, 'Juvenal Silva', '123', 'juves@yahoo.com.br', 'M', 0),
+	(3, 'julio', '12', 'juliorgm@gmail.com', 'A', 1),
+	(5, 'Itálo Silva', '123', 'italk@bol.com', 'M', 0),
+	(6, 'hernandes', '123', 'erd@gmail.com', 'A', 1),
+	(7, 'Jefferson', '123456', 'jeff@gmail.com', 'A', 1);
+/*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
+/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
