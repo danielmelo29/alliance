@@ -33,6 +33,15 @@ class Login extends MX_Controller {
 		echo Modules::run('ace_admin/morador',$data);
 	}
 	
+	public function redirecionamento_erros($data){
+	
+		$data['breadcrumbs']=array('Home'=>'Agenda');
+		$data['titulo']='Home Administrador';
+		$data['module']='login';
+		$data['view_file']='display';
+		echo Modules::run('ace_admin/login',$data);
+	}
+	
 	function autenticar()	{
 		$login =  strtoupper($this->input->post('login'));
 		$senha = sha1($this->input->post('senha'));
@@ -69,7 +78,7 @@ class Login extends MX_Controller {
 					break;
 			}
 		}else{
-			echo 'usuario não esta cadastrado no sistema ' ;
+			$this->redirecionamento_erros(array('erro'=>"Login ou senha errados"));
 		}
 	}
 	

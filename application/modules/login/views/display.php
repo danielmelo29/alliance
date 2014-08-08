@@ -1,5 +1,9 @@
 <?php
 
+if (isset($erro)) {
+	echo '<p style="color:red">** '.$erro.' **</p>';
+}
+
 echo form_open('login/submit');
 
 echo form_error('login');
