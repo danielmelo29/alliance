@@ -15,16 +15,16 @@ class Login extends MX_Controller {
 		
 	}
 	
-	public function redirecionamento_administrador($data){
+	public function redirecionamento_administrador(){
 		
 		$data['breadcrumbs']=array('Home'=>'Agenda');
 		$data['titulo']='Home Administrador';
 		$data['module']='administrador';
 		$data['view_file']='display';	
-		echo Modules::run('ace_admin/blank',$data);
+		echo Modules::run('ace_admin/administrador',$data);
 	}
 	
-	public function redirecionamento_morador($data){
+	public function redirecionamento_morador(){
 	
 		$data['breadcrumbs']=array('Home'=>'Agenda');
 		$data['titulo']='Agenda Manutenção';
@@ -47,24 +47,25 @@ class Login extends MX_Controller {
 				$array = array ('id_user' => $user->ID_USUARIO , 'login' => $user->USU_LOGIN,'nome' => $user->USU_NOME.' '.$user->USU_SOBRENOME, 'foto' => $user->USU_FOTO) ;
 					
 				$this->session->set_userdata($array) ;
-				echo '<pre>';
-				print_r($user);
-				exit;
+// 				echo '<pre>';
+// 				print_r($user);
+// 				echo '</pre>';
+				
 			}else{
 				echo 'usuario esta marcado como inativo ' ;
 			}
 	
 			switch ($user->USU_PERMISSAO) {
 				case 'A':
-					$this->redirecionamento_administrador($data);
+					$this->redirecionamento_administrador();
 					break;
 	
 				case 'M':
-					$this->redirecionamento_morador($data);;
+					$this->redirecionamento_morador();;
 					break;
 	
 				default:
-					$this->redirecionamento_geral($data);
+					$this->redirecionamento_geral();
 					break;
 			}
 		}else{
