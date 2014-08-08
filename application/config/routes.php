@@ -38,7 +38,7 @@
 |
 */
 
-$route['default_controller'] = "ace_admin/login";
+$route['default_controller'] = "login/index";
 $route['404_override'] = '';
 
 

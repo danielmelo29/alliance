@@ -2,7 +2,9 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<title>Login Page - Ace Admin</title>
+		<title><?=$titulo_pagina?></title>
+
+		<meta name="description" content="" />
 
 		<meta name="description" content="User login page" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -23,7 +25,7 @@
 
 		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300" />
 
-	3<!--ace styles-->
+		<!--ace styles-->
 
 		<link rel="stylesheet" href="<?=base_url('assets/css/ace.min.css')?>" />
 		<link rel="stylesheet" href="<?=base_url('assets/css/ace-responsive.min.css')?>" />
@@ -69,42 +71,16 @@
 						
 	
 	
-		<!-- -- >  Inicio do campo validar <!-- -->
+		<!-- -- >  Inicio do campo autenticar <!-- -->
 	
-	
-						 <form action="ace_admin/validar" method="post" > 
-							
-						<fieldset>
-						<label>
-						<span class="block input-icon input-icon-right">
-						<input type="text" class="span12" required="Preencha este campo" placeholder="Login" name="login" />
-						<i class="icon-user"></i>
-						</span>
-						</label>
-  						<label>
-						<span class="block input-icon input-icon-right">
-						<input type="password" class="span12" required="Não pode ser vazio" placeholder="Senha" name="password" />
-	  					<i class="icon-lock"></i>
-						</span>
-						</label>
-						<div class="space"></div>
-						<div class="clearfix">
-						<label class="inline">
-						<input type="checkbox" />
-						<span class="lbl"> Lembre-me</span>
-						</label>
-						<button onclick="return true;" class="width-35 pull-right btn btn-small btn-primary">
-						<i class="icon-key"></i>
-						Login
-						</button>
-						</div>
-						<div class="space-4"></div>
-						</fieldset>
-						</form> 
+					   <?php 
+					
+					   
+					   $this->load->view($module.'/'.$view_file); ?>
 												
 						
 						
-		<!-- -- >  Final campo validar <!-- -->				
+		<!-- -- >  Final campo autenticar <!-- -->				
 						
 						
 												

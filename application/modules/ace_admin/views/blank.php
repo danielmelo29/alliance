@@ -15,15 +15,6 @@
 		<link href="<?php echo base_url('assets/grid/plugins/searchFilter.css')?>"  rel="stylesheet" />
 		<link href="<?php echo base_url('assets/grid/plugins/ui.multiselect.css')?>"  rel="stylesheet" />
 		
-		
-		
-		
-		
-		
-		
-		
-				
-
 		<!--basic styles-->
 
 		<link href="<?php echo base_url('assets/css/bootstrap.min.css')?>"  rel="stylesheet" />
@@ -486,114 +477,7 @@
 					
 					
 					<!--Final grupos colapse -->
-					
-					<?php
-					
-				/*	
-                    <li>
-                    
-                        <a href="<?=base_url('calendario')?>">
-                            <i class="icon-calendar"></i>
-                            <span class="menu-text"> Nova Reserva </span>
-                        </a>
-                    </li>
-
-					<li>
-					*/				  
-					?>
-						<!-- Usar como exemplo de menus sub-menus de 4 niveis
-						
-						<li>
-						<a href="#" class="dropdown-toggle">
-								<i class="icon-user "></i>
-								<span class="menu-text"> Cadastros </span>
-
-								<b class="arrow icon-angle-down"></b>
-							</a>
-
-							<ul class="submenu">
-								<li>
-									<a href="elements.html">
-										<i class="icon-double-angle-right"></i>
-										Usuários
-									</a>
-								</li>
-
-								<li>
-									<a href="buttons.html">
-										<i class="icon-double-angle-right"></i>
-										Botões &amp; Icones
-									</a>
-								</li>
-
-								<li>
-									<a href="treeview.html">
-										<i class="icon-double-angle-right"></i>
-										Funcionários
-									</a>
-								</li>
-
-								<li>
-									<a href="jquery-ui.html">
-										<i class="icon-double-angle-right"></i>
-										Espaços
-									</a>
-								</li>
-
-								<li>
-									<a href="nestable-list.html">
-										<i class="icon-double-angle-right"></i>
-										Telefones
-									</a>
-								</li>
-
-								<li>
-									<a href="#" class="dropdown-toggle">
-										<i class="icon-double-angle-right"></i>
-
-										Terceirizados
-										<b class="arrow icon-angle-down"></b>
-									</a>
-
-									<ul class="submenu">
-										<li>
-											<a href="#">
-												<i class="icon-leaf"></i>
-											      Serviços
-											</a>
-										</li>
-
-										<li>
-											<a href="#" class="dropdown-toggle">
-												<i class="icon-pencil"></i>
-
-												4th level
-												<b class="arrow icon-angle-down"></b>
-											</a>
-
-											<ul class="submenu">
-												<li>
-													<a href="#">
-														<i class="icon-plus"></i>
-														Add Product
-													</a>
-												</li>
-
-												<li>
-													<a href="#">
-														<i class="icon-eye-open"></i>
-														View Products
-													</a>
-												</li>
-											</ul>
-										</li>
-									</ul>
-								</li>
-							</ul>
-						</li>
-
-						-->
-					
+	
 
 					<li>
 						<a href="<?=base_url('funcionarios')?>">
@@ -731,37 +615,7 @@
 			
 			
 			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
+				
 			  <div class="sidebar-collapse" id="sidebar-collapse">
 					<i class="icon-double-angle-left"></i>
 				</div>
